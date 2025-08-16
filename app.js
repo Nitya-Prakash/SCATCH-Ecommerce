@@ -15,10 +15,6 @@ app.use("/owner", ownerRouter);
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 
-app.set("view engine", "ejs")
-
-// app.get("/", (req, res)=> {
-//     res.send("hey")
-// });
+app.set("view engine", "ejs");
 
 app.listen(3000);
