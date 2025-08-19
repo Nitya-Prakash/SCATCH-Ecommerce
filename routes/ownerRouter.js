@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const ownerModel = require("../models/ownerModel");
+const isLoggedIn = require("../middlewares/isLoggedIn");
 
 if (process.env.NODE_ENV === "development") {
+  // console.log(process.env.NODE_ENV);
   router.post("/create", async (req, res) => {
     let owners = await ownerModel.find();
     if (owners.length > 0) {
@@ -22,8 +24,9 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-router.get("/", (req, res) => {
-  res.send("Hello");
+router.get("/admin", isLoggedIn, (req, res) => {
+  let success = req.flash("success");
+  res.render("createProducts", { success });
 });
 
 module.exports = router;
